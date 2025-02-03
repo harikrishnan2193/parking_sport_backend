@@ -1,22 +1,20 @@
 import { DataTypes, Model, Optional } from "sequelize";
 import sequelize from "../db/connection";
 
-// Define the attributes of the Location model
+// define the attributes
 interface LocationAttributes {
     location_id: number;
     location_name: string;
 }
 
-// Define the creation attributes (optional location_id for new records)
 interface LocationCreationAttributes extends Optional<LocationAttributes, "location_id"> { }
 
-// Extend Sequelize's Model class
 class Location extends Model<LocationAttributes, LocationCreationAttributes> implements LocationAttributes {
     public location_id!: number;
     public location_name!: string;
 }
 
-// Define the model
+// define  model
 Location.init(
     {
         location_id: {
@@ -33,7 +31,7 @@ Location.init(
     {
         sequelize,
         tableName: "locations",
-        timestamps: false, // If you don't want createdAt & updatedAt columns
+        timestamps: false, 
     }
 );
 

@@ -1,7 +1,6 @@
 import { DataTypes, Model, Optional } from "sequelize";
 import sequelize from "../db/connection";
 
-// Define model attributes
 interface ParkingRecordAttributes {
   id: number;
   vehicle_number: string;
@@ -13,10 +12,8 @@ interface ParkingRecordAttributes {
   checkout_time?: Date | null;
 }
 
-// Define optional attributes for creating a new record (e.g., `id` is auto-incremented)
 interface ParkingRecordCreationAttributes extends Optional<ParkingRecordAttributes, "id" | "checkout_time"> {}
 
-// Extend Sequelize's Model class
 class ParkingRecord extends Model<ParkingRecordAttributes, ParkingRecordCreationAttributes> implements ParkingRecordAttributes {
   public id!: number;
   public vehicle_number!: string;
@@ -28,7 +25,7 @@ class ParkingRecord extends Model<ParkingRecordAttributes, ParkingRecordCreation
   public checkout_time?: Date | null;
 }
 
-// Define the model
+// define model
 ParkingRecord.init(
   {
     id: {
@@ -69,7 +66,7 @@ ParkingRecord.init(
   {
     sequelize,
     tableName: "parking_records",
-    timestamps: false, // No createdAt or updatedAt columns
+    timestamps: false,
   }
 );
 
