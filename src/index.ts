@@ -3,6 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import router from "./routes/router"; 
 import sequelize from "./db/connection";
+import { setupSwagger } from "./swagger/swaggerConfig";
 
 dotenv.config();
 
@@ -12,6 +13,9 @@ const parking = express();
 parking.use(cors());
 parking.use(express.json());
 
+//swagger
+setupSwagger(parking);
+
 parking.use(router);
 
 sequelize
@@ -19,7 +23,7 @@ sequelize
   .then(() => console.log("Database connected successfully"))
   .catch((error: Error) => console.error("Unable to connect to the database:", error));
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 4000;
 parking.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
